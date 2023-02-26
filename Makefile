@@ -68,3 +68,6 @@ clean:
 distclean:
 	@echo CLEAN $(DISTCLEAN_LIST)
 	@rm -f $(DISTCLEAN_LIST)
+
+format:
+	clang-format -i --style=file $(SRC_PATH)/*.[hc]*
