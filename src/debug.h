@@ -1,5 +1,5 @@
-#ifndef clox_debug_h
-#define clox_debug_h
+#ifndef CLOX_DEBUG_H
+#define CLOX_DEBUG_H
 
 #include "chunk.h"
 
@@ -10,4 +10,4 @@ void disassembleChunk(Chunk *chunk, const char *name);
 // returns the offset of the start of the next instruction
 int disassembleInstruction(Chunk *chunk, int offset);
 
-#endif
+#endif /* CLOX_DEBUG_H */

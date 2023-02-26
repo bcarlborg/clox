@@ -1,16 +1,16 @@
-#ifndef clox_chunk_h
-#define clox_chunk_h
+#ifndef CLOX_CHUNK_H
+#define CLOX_CHUNK_H
 
 #include "common.h"
 
 typedef enum {
-	OP_RETURN,
+  OP_RETURN,
 } OpCode;
 
 typedef struct {
-	int count;
-	int capacity;
-	uint8_t* code; // pointer to an array
+  int count;
+  int capacity;
+  uint8_t *code; // pointer to an array
 } Chunk;
 
 void initChunk(Chunk *chunk);
@@ -21,4 +21,4 @@ void freeChunk(Chunk *chunk);
 // in this chunk
 void writeChunk(Chunk *chunk, uint8_t byte);
 
-#endif
+#endif /* CLOX_CHUNK_H */
