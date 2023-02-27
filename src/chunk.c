@@ -7,11 +7,15 @@ void initChunk(Chunk *chunk) {
   chunk->count = 0;
   chunk->capacity = 0;
   chunk->code = NULL;
+  initValueArray(&chunk->constants);
 }
 
 void freeChunk(Chunk *chunk) {
-  // free all the data we allocated in the array
+  // free all the data we allocated in our chunk
   FREE_ARRAY(uint8_t, chunk->code, chunk->capacity);
+
+  // also free any constants in our chunk
+  freeValueArray(&chunk->constants);
 
   // zero out the values in the chunk
   initChunk(chunk);
@@ -33,3 +37,9 @@ void writeChunk(Chunk *chunk, uint8_t byte) {
   chunk->code[chunk->count] = byte;
   chunk->count++;
 }
+
+int addConstant(Chunk *chunk, Value value) {
+  writeValueArray(&chunk->constants, value);
+  return chunk->constants.count - 1;
+}
+
