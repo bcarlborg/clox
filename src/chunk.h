@@ -12,7 +12,9 @@ typedef enum {
 typedef struct {
   int count;
   int capacity;
-  uint8_t *code; // pointer to an array
+  uint8_t *code; // array of op codes and arguments
+  int *lines;    // line number for each element in code,
+                 //		has a 1:1 mapping with code.
   ValueArray constants;
 } Chunk;
 
@@ -22,7 +24,7 @@ void freeChunk(Chunk *chunk);
 
 // add a new byte to the collection of bytes
 // in this chunk
-void writeChunk(Chunk *chunk, uint8_t byte);
+void writeChunk(Chunk *chunk, uint8_t byte, int line);
 
 // add a new constant to our chunk and return the
 // index of that constatnt in the constants array
