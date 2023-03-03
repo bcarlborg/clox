@@ -80,7 +80,19 @@ static InterpretResult run() {
 }
 
 InterpretResult interpret(const char *source) {
-  compile(source);
+  Chunk chunk;
+  initChunk(&chunk);
+
+  if (!compile(source, &chunk)) {
+    freeChunk(&chunk);
+    return INTERPRET_COMPILE_TIME_ERROR;
+  }
+
+  vm.chunk = &chunk;
+  vm.ip = vm.chunk->code;
+
+  InterpretResult result = run();
+
   return INTERPRET_OK;
 }
 
